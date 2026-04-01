@@ -2,7 +2,7 @@
 import os
 from PIL import Image
 from torch.utils.data import Dataset
-import torchvision.transforms as transforms 
+import torchvision.transforms as transforms
 
 CLASS_NAMES=['glioma','meningioma','pituitary','notumor']
 
@@ -30,8 +30,8 @@ class BrainTumorDataset(Dataset):
     if self.transform:
       image=self.transform(image)
       return image, labels
-       
-      
+
+
 
 
 
