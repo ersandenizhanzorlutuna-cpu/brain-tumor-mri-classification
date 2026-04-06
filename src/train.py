@@ -1,7 +1,7 @@
 
 import os
 import sys
-import torch 
+import torch
 import torch.nn as nn
 from torch.utils.data import Dataloader,random_split
 from sklearn.model_selection import train_test_split
@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from src.dataset import BrainTumorDataset, CLASS_NAMES
 from src.models import BrainTumorCNN
 
-# Device # 
+# Device #
 def get_device():
   if torch.cuda.is_available():
     print(f"GPU Available: {torch.cuda.get_device_name(0)}")
@@ -26,7 +26,7 @@ def get_transformer():
   train_transform = transforms.Compose([
       transforms.Resize((224, 224)),
       transforms.RandomHorizontalFlip(p=0.5),
-      transforms.RandomRotation(degrees=15), 
+      transforms.RandomRotation(degrees=15),
       transforms.ColorJitter(brightness=0.3, contrasts=0.3),
       transforms.ToTensor(),
       transforms.Normalize(
@@ -68,8 +68,8 @@ def get_dataloaders(data_dir, batch_size=32):
       test_size=0.3,
       stratify=all_labels,
       random_state=42
-    
-  )   
+
+  )
   val_paths, test_paths, val_labels, test_labels = train_test_split(
       val_paths,
       val_labels,
@@ -99,7 +99,7 @@ def get_dataloaders(data_dir, batch_size=32):
 
   val_dataset.samples = list(zip(val_paths, val_labels))
 
-  # Dataloaders # 
+  # Dataloaders #
 
   train_loader = Dataloader(
       train_dataset,
@@ -121,7 +121,7 @@ def get_dataloaders(data_dir, batch_size=32):
       shuffle=False,
       num_workers=2
   )
-  
+
 
   print(f"Train:{len(train_dataset)} |" f"Val: {len(val_dataset)} |" f"Test: {len(test_dataset)}" )
 
@@ -129,4 +129,3 @@ def get_dataloaders(data_dir, batch_size=32):
 
 
 
-  
